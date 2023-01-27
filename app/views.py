@@ -52,6 +52,30 @@ def display_access(request):
     return render(request,'display_access.html',d)
 
 
+def update_webpage(request):
+    #Webpage.objects.filter(name='basha123').update(url='https://basha.in')
+    #Webpage.objects.filter(topic_name='Cricket').update(name='MSD')
+    #Webpage.objects.filter(name='basha').update(topic_name='Cricket')
+    #Webpage.objects.filter(name='pawan').update(topic_name='Hockey')
+    #Webpage.objects.update_or_create(name='suresh',defaults={'url':'https://suresh.in'})
+    #Webpage.objects.update_or_create(name='MSD',defaults={'url':'https://MSD.in'})
+    T=Topic.objects.get_or_create(topic_name='Cricket')[0]
+    T.save()
+    Webpage.objects.update_or_create(name='ashu',defaults={'topic_name':T,'url':'https://suresh.in'})
+
+    QSW=Webpage.objects.all()
+    d={'webpages':QSW}
+    return render(request,'display_webpages.html',d)
+
+
+def delete_webpage(request):
+    #Webpage.objects.filter(name='Abcdefg').delete()
+    #Webpage.objects.filter(topic_name='Cricket').delete()
+    #Webpage.objects.filter(name='aravindh').delete()
+    Webpage.objects.all().delete()
+    QSW=Webpage.objects.all()
+    d={'webpages':QSW}
+    return render(request,'display_webpages.html',d)
 
 
 
